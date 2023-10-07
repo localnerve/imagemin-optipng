@@ -1,9 +1,9 @@
 name: test
 on:
   push:
-    branches: [ master, esm, public-package ]
+    branches: [ public-package ]
   pull_request:
-    branches: [ master, esm, public-package ]
+    branches: [ public-package ]
 
 jobs:
   test:
@@ -13,9 +13,9 @@ jobs:
       fail-fast: false
       matrix:
         node-version:
-          - 12
-          - 14
           - 16
+          - 18
+          - 20
         os:
           - ubuntu-latest
           - macos-latest
