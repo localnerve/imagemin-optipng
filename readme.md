@@ -2,6 +2,8 @@
 
 > Imagemin plugin for OptiPNG
 
+**A published ESM fork of imagemin/imagemin-optipng**
+
 ## Install
 
 ```
