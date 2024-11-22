@@ -57,11 +57,10 @@ const main = options => async buffer => {
 		arguments_.push('-np');
 	}
 
-	await fs.writeFile(inputFile, buffer);
 	arguments_.push(inputFile);
 
+	await fs.writeFile(inputFile, buffer);
 	await execa(optipng, arguments_);
-
 	const result = await fs.readFile(outputFile);
 
 	await fs.rm(outputFile, {force: true});
