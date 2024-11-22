@@ -1,5 +1,7 @@
 import {Buffer} from 'node:buffer';
-import execBuffer from 'exec-buffer';
+import fs from 'node:fs/promises';
+import {execa} from 'execa';
+import tempfile from 'tempfile';
 import isPng from 'is-png';
 import optipng from 'optipng-bin';
 
@@ -22,6 +24,9 @@ const main = options => async buffer => {
 		return buffer;
 	}
 
+	const outputFile = tempfile();
+	const inputFile = tempfile();
+
 	const arguments_ = [
 		'-strip',
 		'all',
@@ -29,7 +34,7 @@ const main = options => async buffer => {
 		'-o',
 		options.optimizationLevel,
 		'-out',
-		execBuffer.output,
+		outputFile,
 	];
 
 	if (options.errorRecovery) {
@@ -52,13 +57,17 @@ const main = options => async buffer => {
 		arguments_.push('-np');
 	}
 
-	arguments_.push(execBuffer.input);
+	await fs.writeFile(inputFile, buffer);
+	arguments_.push(inputFile);
 
-	return execBuffer({
-		input: buffer,
-		bin: optipng,
-		args: arguments_,
-	});
+	await execa(optipng, arguments_);
+
+	const result = await fs.readFile(outputFile);
+
+	await fs.rm(outputFile, {force: true});
+	await fs.rm(inputFile, {force: true});
+
+	return result;
 };
 
 export default main;
