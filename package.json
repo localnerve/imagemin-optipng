@@ -1,6 +1,6 @@
 {
 	"name": "@localnerve/imagemin-optipng",
-	"version": "11.0.0",
+	"version": "11.0.1",
 	"description": "Imagemin plugin for OptiPNG",
 	"license": "MIT",
 	"repository": "localnerve/imagemin-optipng",
@@ -26,20 +26,19 @@
 		"png"
 	],
 	"dependencies": {
-		"execa": "^9.5.1",
+		"execa": "^9.5.2",
 		"tempfile": "^5.0.0",
 		"is-png": "^3.0.1",
 		"optipng-bin": "^9.0.0"
 	},
 	"devDependencies": {
 		"ava": "^6.2.0",
-		"xo": "^0.59.3"
+		"xo": "^0.60.0"
 	},
 	"overrides": {
     "download": "npm:@xhmikosr/downloader",
     "bin-wrapper": "npm:@xhmikosr/bin-wrapper",
 		"bin-build": "npm:@localnerve/bin-build",
-		"webpack": "^5.96.1",
-		"cross-spawn": "^7.0.6"
+		"webpack": "^5.97.1"
 	}
 }
