@@ -17,7 +17,7 @@ jobs:
           - 24
         os:
           - ubuntu-latest
-          - macos-15
+          - macos-latest
           - windows-latest
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # 6.0.1
@@ -25,5 +25,15 @@ jobs:
         uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # 6.1.0
         with:
           node-version: ${{ matrix.node-version }}
+      - name: Macos arm setup only
+        if: runner.os == 'macOS'
+        run: |
+          brew install cmake autoconf automake libtool nasm pkg-config zlib libimagequant
+          brew list --versions
+          sudo mkdir -p /usr/local/lib
+          sudo ln -s `brew --prefix libpng`/lib/libpng16.a /usr/local/lib/libpng16.a
+          echo "ASM_NASM=\"`brew --prefix nasm`/bin/nasm\"" >> $GITHUB_ENV
+          echo "VERBOSE=true" >> $GITHUB_ENV
+          echo "CPPFLAGS=-DPNG_ARM_NEON_OPT=0" >> $GITHUB_ENV
       - run: npm install
       - run: npm test
