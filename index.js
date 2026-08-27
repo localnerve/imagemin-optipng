@@ -69,4 +69,4 @@ const main = options => async buffer => {
 	return result;
 };
 
-export default main;
+export default main; // eslint-disable-line unicorn/default-export-style

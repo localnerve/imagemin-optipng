@@ -1,15 +1,16 @@
 {
 	"name": "@localnerve/imagemin-optipng",
-	"version": "11.2.0",
+	"version": "12.0.0",
 	"description": "Imagemin plugin for OptiPNG",
 	"license": "MIT",
 	"repository": "localnerve/imagemin-optipng",
 	"type": "module",
 	"main": "./index.js",
 	"engines": {
-		"node": ">=18"
+		"node": ">=22"
 	},
 	"scripts": {
+		"install-arm": "sudo mkdir -p /usr/local/lib && sudo ln -s -f `brew --prefix libpng`/lib/libpng16.a /usr/local/lib/libpng16.a && CPPFLAGS=-DPNG_ARM_NEON_OPT=0 npm i",
 		"test": "xo && ava",
 		"test:debug": "node --inspect-brk node_modules/.bin/ava --timeout=10m"
 	},
@@ -26,14 +27,14 @@
 		"png"
 	],
 	"dependencies": {
-		"execa": "^9.6.1",
+		"execa": "^10.0.1",
 		"tempfile": "^6.0.1",
 		"is-png": "^3.0.1",
 		"optipng-bin": "^9.0.0"
 	},
 	"devDependencies": {
-		"ava": "^6.4.1",
-		"xo": "^1.2.3"
+		"ava": "^8.0.1",
+		"xo": "^4.0.0"
 	},
 	"overrides": {
     "download": "npm:@xhmikosr/downloader",
