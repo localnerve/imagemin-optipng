@@ -13,7 +13,7 @@ test('optimize a PNG', async t => {
 });
 
 test('throw on empty input', async t => {
-	await t.throwsAsync(optipng()(), {message: /Expected a buffer/});
+	await t.throwsAsync(optipng()(), {message: /Expected a buffer/v});
 });
 
 test('bitDepthReduction option', async t => {

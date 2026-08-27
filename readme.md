@@ -6,7 +6,7 @@
 
 ## Install
 
-```
+```bash
 $ npm install imagemin-optipng
 ```
 
@@ -14,6 +14,12 @@ $ npm install imagemin-optipng
 `imagemin-optipng` uses neon chipset optimizations that are incompatible with Apple Silicon.  
 To compile on newer M1/M2/M3/M4+ Macs, set the environment variable to disable neon optimizations `CPPFLAGS=-DPNG_ARM_NEON_OPT=0`
 Since npm doesn't allow one to hook the install event (only the install script), this is not fully automatable. The npm lifecycle hooks do not currently provide any mechanism to run scripts prior to dependency build/install, such as setting variables for `arm64`.
+
+If you are installing this project alone on Mac Silicon:
+
+```bash
+npm run install-arm
+```
 
 The following package.json script in a parent project will build `imagemin-optipng` for `arm64` architectures:
 
